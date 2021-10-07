@@ -1,0 +1,19 @@
+Week 8 chapter 3
+
+3.5.2
+
+Q 3.10 (A) when we decrease the ff_hidden_g_bar_i,the effects it has on the hidden activation average is of both
+the Hidden activation and the inhibiton activation is very apparent, the inhibition activation spikes higher when
+ff_hidden_g_bar_i is 3 than 5, and the same goes with the hidden activation average, the inhibition activation
+average minumum activation average is a little over 0.3 then the maximum is 0.8 (b) When we increase
+ff_hidden_g_bar_i to 7 the Activaiton average is surprisingly apparent too, the activation starts taking place
+at the cycle of 5, however, once it reachespast the cycle of 20, the activation of both the inhibation and
+hidden start is more or less unchanging after every other cycle, with the hidden activatoin remaining at below 0.1
+and the actication unit going above 0.1.
+
+1 3.11 (A) the inhibititry neurons and the hidden neurons seem to be much more active, inhibition
+activation reaches almost the average activation of 1, as well as hidden activatin average.
+(c)the activation of the hidden neuron srtarts becomes active very much later than the inhibitory neurons, it 
+becomes more active after 20 cycle but remains at a consant rate below 0.1 avtivation. Whereas the inhibition
+neuron isactive very early when 2 Cycles pass, however after 10 Cycles it remains at a constant activation
+average of just above 0.2

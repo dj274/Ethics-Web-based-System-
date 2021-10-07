@@ -1,0 +1,16 @@
+3.6(a) when the 7 and 3 units are activated on the input layer, the numbers 7 and 3 are displayed on the panel,
+however we notice the 7 seems to be much more clearer to see, as the activation value of 7 is 0.9843 and the
+acyivation values of 3 is 0.9024, therefore the actication values of 7 is stronger. (b) this result is accounted
+by activating 7 and 3 at once on the input layer, and as a result the output on the hidden layer activates three
+and seven, each with an activation value of 0.9500 (c) when you change the value of g_bar_1 this can enhance the
+the difference between the values. (d) this can be useful in cognition because it can make things more apparent
+and more memorable
+
+3.7 (a) the minimal number of units that need to be clamped to produce the pattern completiob to the full 8 is 8
+
+
+Presented to Sanjay and Ozgurthe database webpage
+Presented to Sanjay and Ozgur the ethics form website
+Discussed that we need a neat web formatting
+Spoke about the difference between different users, e.g. Admin, Comitted member, Reviewer
+discussed about how we can improve ethics form websites

@@ -1,0 +1,155 @@
+TASK 1)
+
+CREATE TABLE Centre(
+    CentreID CHAR(1) PRIMARY KEY NOT NULL,
+    Name VARCHAR(255) NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    PhoneNo VARCHAR(255) NOT NULL
+);
+ 
+CREATE TABLE Car(
+    CarID CHAR(3) PRIMARY KEY NOT NULL,
+    RegNo VARCHAR(255) NOT NULL, 
+    Model VARCHAR(255) NOT NULL
+);
+ 
+ 
+CREATE TABLE School(
+    SchoolID CHAR(1) PRIMARY KEY NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    FOREIGN KEY (Address) REFERENCES Centre(Address)
+);
+ 
+CREATE TABLE AdminStaff(
+    EmpID CHAR(4) PRIMARY KEY NOT NULL,
+    Forename VARCHAR(255) NOT NULL,
+    Surname VARCHAR(255) NOT NULL,
+    Gender CHAR(1) CHECK (GENDER in ('M', 'F')) NOT NULL,
+    PhoneNo INT NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    Role VARCHAR(255) NOT NULL,
+    SchoolID CHAR(4) NOT NULL,
+    FOREIGN KEY (SchoolID) REFERENCES School(SchoolID)
+);
+ 
+CREATE TABLE Instructor(
+    EmpID CHAR(4) PRIMARY KEY NOT NULL,
+    Forename VARCHAR(255) NOT NULL,
+    Surname VARCHAR(255) NOT NULL,
+    Gender CHAR(1) CHECK (GENDER in ('M', 'F')) NOT NULL,
+    PhoneNo VARCHAR(255) ,
+    Address VARCHAR(255) NOT NULL,
+    LicenceNo VARCHAR(255) NOT NULL,
+    SchoolID CHAR(4),
+    FOREIGN KEY (SchoolID) REFERENCES School(SchoolID),
+    FOREIGN KEY (CarID) REFERENCES Car(CarID)
+);
+ 
+CREATE TABLE Client(
+    ClientID, CHAR(4) PRIMARY KEY NOT NULL,
+    Forename VARCHAR(255) NOT NULL,
+    Surname VARCHAR(255) NOT NULL,
+    Gender CHAR(1) CHECK (GENDER in ('M', 'F', 'O')) NOT NULL,
+    DoB DATE('YYYY-MM-DD') NOT NULL,
+    PhoneNo INT NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    ProvLicenceNo VARCHAR(255) NOT NULL
+);
+ 
+CREATE TABLE Lesson(
+    OnDate DATE(YYYY-MM-DD) NOT NULL, 
+    OnTime TIME(hh:mm:ss) NOT NULL, 
+    ClientID CHAR(4) NOT NULL, 
+    EmpID CHAR(4) NOT NULL,
+    FOREIGN KEY (ClientID) REFERENCES Client(ClientID),
+    FOREIGN KEY (EmpID) REFERENCES Instructor(EmpID)
+);
+ 
+CREATE TABLE Test(    
+    OnDate DATE(YYYY-MM-DD) NOT NULL, 
+    OnTime TIME(hh:mm:ss) NOT NULL, 
+    ClientID CHAR(4) NOT NULL, 
+    EmpID CHAR(4) NOT NULL
+    CentreID CHAR(4) NOT NULL,
+    Status CHAR(255) NOT NULL,
+    Reason VARCHAR(255) CHECK (STATUS in ('Not Taken', 'Passed', 'Failed')) NOT NULL,
+    FOREIGN KEY (EmpID) REFERENCES Instructor(EmpID),
+    FOREIGN KEY (ClientID) REFERENCES Client(ClientID),
+    FOREIGN KEY (CentreID) REFERENCES Centre(CentreID) 
+);
+ 
+INSERT INTO Centre(CentreID, Name, Address, PhoneNo)
+VALUES ('1', 'Canterbury', '12 Meryl Street' '+44 1227-968-5287'),
+VALUES ('2', 'Whitstable', '5 The Strand, Whitstable', '01227457012'),
+VALUES ('3', 'Faversham', '1 High Street', '01795 865129');
+ 
+INSERT INTO Car(CarID, RegNo, Model)
+VALUES('124', 'BD51 SMR', 'VW Polo'),('653','WS62 QWE','Ford Focus'),('912', 'FD52 TGF', 'VW Polo'),('167','fFD52 YTR','VW Polo');
+ 
+INSERT INTO School(SchoolID, Address)
+VALUES('1', '12 Whitechapel, Canterbury'),('2', '9 Middle Wall, Whitstable');
+ 
+INSERT INTO AdminStaff(EmpID, Forename, Surname, Gender, PhoneNo, Address, Role, SchoolID)
+VALUES('1006', 'Fred', 'Grimes', 'M', '012275435665', '27 Cherry Street', 'assistant', '2'),('1009', 'Jill', 'Joffries', 'F', '+44776618645', '27 Cherry Street', 'manager', '1'),('1019', 'Justine', 'Joffries', 'F', '(01227) 812035', '19 Creosote Road', 'assistant', '1');
+ 
+INSERT INTO Instructor(EmpID, Forename, Surname, Gender, PhoneNo, Address, LicenceNo, SchoolID, CarID)
+VALUES('2009', 'James', 'Joffries', 'M', '012275435665', '27 Cherry Street', 'FTR76398', '1', '124'), ('2011', 'Jim', 'Adams', 'M', '065490125674', '4 The Vale', 'TGY98555a', '2', '912',),('2013', 'Trinny', 'Vair', 'F' '0044587208725', '17 High Street, Chartham', 'YHF7665467', '1', '653');
+ 
+INSERT INTO Client(ClientID, Forename, Surname, Gender, DoB, PhoneNo, Address, ProvLicenceNo)
+VALUES('1', 'Andy', 'Twill', 'M', '1998-02-01', '0044678412349876', '27 Cherry Street, CT4 7NF', 'TYH7890'),('2', 'Sue Adams', 'F', '1989-06-14','0841-234-876', '45 Eggy Lane', 'CIO67891'), ('3', 'Jean', 'Adams', 'F', '2001-11-19', '01227765329', '4 Harkness Lane, Canterbury', 'RTY678923');
+ 
+INSERT INTO Lesson(OnDate, OnTime, ClientID, EmpID)
+VALUES('2017-06-24', '10:00:00', '1', '2011'),('2019-06-07', '10:00:00', '2', '2009'),('2017-07-12', '14:00:00', '1', '2011'),('2017-08-19', '16:00:00', '1', '2011'),('2020-08-17', '16:00:00', '2', '2011'),('2020-08-01', '14:00:00', '1', '2009');
+ 
+INSERT INTO Test(OnDate, OnTime, ClientID, EmpID, CentreID, Status, Reason) 
+VALUES('2018-03-01', '11:00:00', '1', '2009', '2', 'Passed', null), ('2019-08-13', '13:00:00', '2', '2011', '3', 'Failed', 'Lack of Observation'),('2019-10-21', '11:00:00', '2', '2011', '2', 'Failed', 'Speeding'),('2020-08-19', '10:00:00', '2', '2009', '2', 'Not Taken' null);
+
+
+TASK 2
+2.1)
+SELECT Lesson.onDate, Lesson.onTime, Instructor.surname 
+FROM Lesson JOIN Instructor 
+ON Lesson.EmpID = Instructor.EmpID 
+WHERE Instructor.Address = '27 Cherry Street';
+
+2.2)
+SELECT DISTINCT Test.Status, COUNT(*) 
+FROM Test 
+JOIN Client 
+ON Test.ClientID = Client.ClientID
+WHERE Client.Gender = 'F'
+GROUP BY Test.Status;
+
+2.) 
+SELECT instructor.empID, instructor.forename, instructor.surname 
+FROM instructor
+WHERE instructor.surname = 'Joffries'
+UNION ALL
+SELECT adminStaff.empID, adminStaff.forename, adminstaff.surname
+FROM adminStaff
+WHERE adminstaff.surname = 'Joffries';
+
+2.4)
+SELECT school.address, school.schoolID, instructor.forename, instructor.surname, count(lesson.empID)
+FROM school JOIN instructor
+ON school.schoolID = instructor.schoolID JOIN Lesson
+ON Lesson.EmpID = instructor.empID
+GROUP BY school.address, school.schoolID, instructor.forename, instructor.surname
+HAVING COUNT(lesson.empID) = 0;
+ 
+2.5)
+SELECT centre.name, test.ondate, test.ontime, test.status, client.forename, client.surname, school.address, car.model
+FROM centre JOIN test
+ON centre.centreid = test.centreid JOIN client
+ON client.clientid = test.clientid JOIN instructor
+ON test.empid = instructor.empid JOIN car
+ON car.carid = instructor.carid JOIN school
+ON instructor.schoolid = school.schoolid
+WHERE centre.name = 'Whitstable'
+ORDER BY client.surname, client.forename;
+
+2.6) 
+UPDATE Lesson
+SET EmpID = '2011'
+WHERE onDate >= '2020-06-12';
+
